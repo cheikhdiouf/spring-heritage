@@ -2,10 +2,7 @@ package com.example.backendspring;
 
 import com.example.backendspring.emuns.AccountStatus;
 import com.example.backendspring.emuns.OperationType;
-import com.example.backendspring.entity.CurrentAccount;
-import com.example.backendspring.entity.Customer;
-import com.example.backendspring.entity.OperationAccount;
-import com.example.backendspring.entity.SavingAccount;
+import com.example.backendspring.entity.*;
 import com.example.backendspring.repository.BankAccountRepository;
 import com.example.backendspring.repository.CustomerRepository;
 import com.example.backendspring.repository.OperationAccountRepository;
@@ -26,6 +23,45 @@ public class BackendSpringApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendSpringApplication.class, args);
+	}
+	@Bean
+	CommandLineRunner commandLineRunner(BankAccountRepository bankAccountRepository){
+		return args -> {
+			BankAccount bankAccount=bankAccountRepository.findById(1000L).orElse(null);
+			if(bankAccount!=null){
+			System.out.println(bankAccount.getId());
+			System.out.println(bankAccount.getBalance());
+			System.out.println(bankAccount.getAccountStatus());
+			System.out.println(bankAccount.getCreateDate());
+			System.out.println(bankAccount.getCustomer().getEmail());
+			System.out.println(bankAccount.getCustomer().getName());
+			System.out.println(bankAccount.getClass().getSimpleName());
+			if(bankAccount instanceof  CurrentAccount)
+			{
+				System.out.println("c'est compte courant =>"+((CurrentAccount)bankAccount).getOverDraft());
+			}
+			else if(bankAccount instanceof  SavingAccount)
+			{
+				System.out.println("c'est compte economie =>"+((SavingAccount)bankAccount).getInterestRate());
+			}
+
+			bankAccount.getOperations().forEach(op->{
+				System.out.println("###########################");
+				System.out.println("###########################");
+				System.out.println(op.getId());
+				System.out.println(op.getDateOperation());
+				System.out.println(op.getAmount());
+				System.out.println(op.getOperationType());
+				System.out.println("###########################");
+				System.out.println("###########################");
+			});
+		}else{System.out.println("###########################");
+				System.out.println("###########################");
+				System.out.println("ce numero compte n'existe pas");
+				System.out.println("###########################");
+				System.out.println("###########################");
+			}
+		};
 	}
 @Bean
 	CommandLineRunner start(CustomerRepository customerRepository,
@@ -73,6 +109,8 @@ bankAccountRepository.findAll().forEach(ban->{
 	}
 
 });
+
+
 
 		};
 }
