@@ -32,12 +32,16 @@ public class CustomerController {
     public  CustomerDTO savedCustomer(@RequestBody CustomerDTO customerDTO){
         return  bankAccountService.saveCustomer(customerDTO);
     }
-    @PutMapping("/customer/{customerId}")
-    public  CustomerDTO updateCustomer(@RequestBody CustomerDTO customerDTO,@PathVariable Long customerId){
-
+    /*@PutMapping("/customer/{customerId}")
+    public  CustomerDTO updateCustomer(@PathVariable Long customerId,@RequestBody CustomerDTO customerDTO){
           customerDTO.setId(customerId);
           return bankAccountService.updateCustomer(customerDTO);
 
+    }*/
+    @PutMapping("/customer/{customerId}")
+    public CustomerDTO updateCustomer(@PathVariable Long customerId, @RequestBody CustomerDTO customerDTO){
+        customerDTO.setId(customerId);
+        return bankAccountService.updateCustomer(customerDTO);
     }
  @DeleteMapping("/customer/{id}")
     public  void deleteCustomer(@PathVariable Long id){

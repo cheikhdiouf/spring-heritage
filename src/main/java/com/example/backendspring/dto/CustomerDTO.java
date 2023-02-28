@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 @Data
 public class CustomerDTO {
-    @Id
     private Long id;
     private String name;
     private String email;
