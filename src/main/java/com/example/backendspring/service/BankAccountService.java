@@ -1,5 +1,6 @@
 package com.example.backendspring.service;
 
+import com.example.backendspring.dto.CustomerDTO;
 import com.example.backendspring.entity.BankAccount;
 import com.example.backendspring.entity.Customer;
 import com.example.backendspring.exception.BalanceNotFoundException;
@@ -9,9 +10,9 @@ import com.example.backendspring.exception.CustomerNotFoundException;
 import java.util.List;
 
 public interface BankAccountService {
-    Customer saveCustomer(Customer customer);
+    CustomerDTO saveCustomer(CustomerDTO customerDTO);
     BankAccount saveCurrentBankAccount(double initialBalance,double overDraft,Long customerId) throws CustomerNotFoundException;
-     List<Customer> listCustomer();
+     List<CustomerDTO> listCustomer();
 
     List<BankAccount> listBankAccount();
 
@@ -20,4 +21,10 @@ public interface BankAccountService {
      void debite(Long accountId,double amount,String description) throws BankAccountNotFoundException, BalanceNotFoundException;
     void credite(Long accountId,double amount,String description) throws BankAccountNotFoundException;
     void transfert (Long accountIdSource,double amount,Long accountIdDestination);
+
+    CustomerDTO getCustomer(Long customerId) throws CustomerNotFoundException;
+
+    CustomerDTO updateCustomer(CustomerDTO customerDTO);
+
+    void deleteCustomer(Long customerId);
 }

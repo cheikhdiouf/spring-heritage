@@ -28,7 +28,7 @@ public abstract class BankAccount  {
     private AccountStatus accountStatus;
    @ManyToOne
     private Customer customer;
-    @OneToMany(mappedBy = "bankAccount",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "bankAccount",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<OperationAccount>operations;
 
 
