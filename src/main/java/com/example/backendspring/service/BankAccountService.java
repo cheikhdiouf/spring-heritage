@@ -13,9 +13,8 @@ import com.example.backendspring.exception.CustomerNotFoundException;
 import java.util.List;
 
 public interface BankAccountService {
-    CustomerDTO saveCustomer(CustomerDTO customerDTO);
+
     CurrentAccountDTO saveCurrentBankAccount(double initialBalance,double overDraft,Long customerId) throws CustomerNotFoundException;
-     List<CustomerDTO> listCustomer();
 
     List<BankAccountDTO> listBankAccount();
 
@@ -25,8 +24,5 @@ public interface BankAccountService {
     void credite(Long accountId,double amount,String description) throws BankAccountNotFoundException;
     void transfert (Long accountIdSource,double amount,Long accountIdDestination);
 
-    CustomerDTO getCustomer(Long customerId) throws CustomerNotFoundException;
 
-    CustomerDTO updateCustomer(CustomerDTO customerDTO);
-    void deleteCustomer(Long customerId);
 }

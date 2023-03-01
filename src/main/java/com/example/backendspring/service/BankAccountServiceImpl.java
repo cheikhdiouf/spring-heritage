@@ -43,13 +43,6 @@ public class BankAccountServiceImpl implements  BankAccountService {
 
 
     @Override
-    public CustomerDTO saveCustomer(CustomerDTO customerDTO) {
-        Customer customer=bankAccountMapperImpl.fromCustomerDTO(customerDTO);
-        Customer savedCustomer=customerRepository.save(customer);
-        return bankAccountMapperImpl.fromCustomer(savedCustomer);
-    }
-
-    @Override
     public CurrentAccountDTO saveCurrentBankAccount(double initialBalance, double overDraft, Long customerId) throws CustomerNotFoundException {
         Customer customer=customerRepository.findById(customerId).orElse(null);
         if(customer==null)
@@ -64,14 +57,7 @@ public class BankAccountServiceImpl implements  BankAccountService {
     }
 
 
-    @Override
-    public List<CustomerDTO> listCustomer() {
-        List<Customer> customers=customerRepository.findAll();
-        List<CustomerDTO> customerDTOs =  customers.stream()
-                .map(cust -> bankAccountMapperImpl.fromCustomer(cust)).
-                collect(Collectors.toList());
-         return   customerDTOs;
-    }
+
     @Override
     public List<BankAccountDTO> listBankAccount() {
        List<BankAccount> bankAccounts=bankAccountRepository.findAll();
@@ -153,22 +139,7 @@ public class BankAccountServiceImpl implements  BankAccountService {
     public void transfert(Long accountIdSource, double amount, Long accountIdDestination) {
 
     }
-    @Override
-    public  CustomerDTO getCustomer(Long customerId) throws CustomerNotFoundException {
-     Customer customer =customerRepository.findById(customerId).
-                 orElseThrow(() ->new CustomerNotFoundException("not found"));
-         return bankAccountMapperImpl.fromCustomer(customer);
-    }
 
-    @Override
-    public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
-        Customer customer=bankAccountMapperImpl.fromCustomerDTO(customerDTO);
-        Customer savedCustomer=customerRepository.save(customer);
-        return bankAccountMapperImpl.fromCustomer(savedCustomer);
-    }
 
-    @Override
-    public void deleteCustomer(Long id){
-        customerRepository.deleteById(id);
-    }
+
 }
