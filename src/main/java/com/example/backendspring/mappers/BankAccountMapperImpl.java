@@ -3,9 +3,11 @@ package com.example.backendspring.mappers;
 import com.example.backendspring.controller.CustomerController;
 import com.example.backendspring.dto.CurrentAccountDTO;
 import com.example.backendspring.dto.CustomerDTO;
+import com.example.backendspring.dto.OperationAccountDTO;
 import com.example.backendspring.dto.SavingAccountDTO;
 import com.example.backendspring.entity.CurrentAccount;
 import com.example.backendspring.entity.Customer;
+import com.example.backendspring.entity.OperationAccount;
 import com.example.backendspring.entity.SavingAccount;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -55,5 +57,16 @@ public class BankAccountMapperImpl {
         BeanUtils.copyProperties(currentAccountDTO,currentAccount);
         currentAccount.setCustomer(fromCustomerDTO(currentAccountDTO.getCustomerDTO()));
         return  currentAccount;
+    }
+
+    public OperationAccountDTO fromOperationAccount(OperationAccount operationAccount){
+        OperationAccountDTO operationAccountDTO=new OperationAccountDTO();
+        BeanUtils.copyProperties(operationAccount,operationAccountDTO);
+        return  operationAccountDTO;
+    }
+    public  OperationAccount fromOperationAccountDTO(OperationAccountDTO operationAccountDTO){
+        OperationAccount operationAccount=new OperationAccount();
+        BeanUtils.copyProperties(operationAccountDTO,operationAccount);
+        return  operationAccount;
     }
 }

@@ -13,10 +13,10 @@ import java.util.List;
 @RequestMapping("/api")
 @Slf4j
 public class CustomerController {
-    private BankAccountService bankAccountService;
+
     private CustomerService customerService;
-    public CustomerController(BankAccountService bankAccountService, CustomerService customerService) {
-        this.bankAccountService = bankAccountService;
+    public CustomerController( CustomerService customerService) {
+
         this.customerService = customerService;
     }
     @GetMapping("/customer")
