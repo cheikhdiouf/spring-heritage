@@ -18,11 +18,11 @@ private BankAccountService bankAccountService;
     public BankAccountController(BankAccountService bankAccountService) {
         this.bankAccountService = bankAccountService;
     }
-@GetMapping("/account/{id}")
+@GetMapping("/accounts/{id}")
    public BankAccountDTO getbankAccountDTO(@PathVariable Long id) throws BankAccountNotFoundException {
         return  bankAccountService.getBankAccount(id);
    }
- @GetMapping("/account")
+ @GetMapping("/accounts")
     public List<BankAccountDTO>ListAccountDTO(){
         return  bankAccountService.listBankAccount();
  }

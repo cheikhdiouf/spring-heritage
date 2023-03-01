@@ -19,26 +19,26 @@ public class CustomerController {
 
         this.customerService = customerService;
     }
-    @GetMapping("/customer")
+    @GetMapping("/customers")
  public    List<CustomerDTO> ListCustomers(){
        return  customerService.listCustomer();
     }
-    @GetMapping("/customer/{id}")
+    @GetMapping("/customers/{id}")
     public  CustomerDTO getCustomer( @PathVariable("id") Long customerId) throws CustomerNotFoundException {
        return customerService.getCustomer(customerId);
     }
 
-    @PostMapping("/customer")
+    @PostMapping("/customers")
 
     public  CustomerDTO savedCustomer(@RequestBody CustomerDTO customerDTO){
         return  customerService.saveCustomer(customerDTO);
     }
-    @PutMapping("/customer/{customerId}")
+    @PutMapping("/customers/{customerId}")
     public CustomerDTO updateCustomer(@PathVariable Long customerId, @RequestBody CustomerDTO customerDTO){
         customerDTO.setId(customerId);
         return customerService.updateCustomer(customerDTO);
     }
- @DeleteMapping("/customer/{id}")
+ @DeleteMapping("/customers/{id}")
     public  void deleteCustomer(@PathVariable Long id){
         customerService.deleteCustomer(id);
  }
