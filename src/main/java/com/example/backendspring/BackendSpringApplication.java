@@ -102,6 +102,7 @@ bankAccountRepository.findAll().forEach(ban->{
 		OperationAccount operationAccount=new OperationAccount();
 		operationAccount.setDateOperation(new Date());
        operationAccount.setAmount(Math.random()*1000);
+	   operationAccount.setDescription(RandomString.make(6));
 	   operationAccount.setOperationType(Math.random()>0.5? OperationType.DEBIT:OperationType.CREDIT);
 	   operationAccount.setBankAccount(ban);
 	   operationAccountRepository.save(operationAccount);
