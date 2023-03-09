@@ -1,12 +1,10 @@
 package com.example.backendspring.controller;
 
 import com.example.backendspring.dto.BankAccountDTO;
+import com.example.backendspring.dto.CustomerDTO;
 import com.example.backendspring.exception.BankAccountNotFoundException;
 import com.example.backendspring.service.BankAccountService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,4 +24,17 @@ private BankAccountService bankAccountService;
     public List<BankAccountDTO>ListAccountDTO(){
         return  bankAccountService.listBankAccount();
  }
+
+
+    @DeleteMapping("/accounts/{id}")
+    public  void deleteCustomer(@PathVariable Long id){
+        bankAccountService.deleteBanKAccount(id);
+    }
+
+ /*   @PutMapping("/account/{id}")
+    public BankAccountDTO updateBankAccount(@PathVariable Long id, @RequestBody BankAccountDTO bankAccountDTO){
+        bankAccountDTO.setId(id);
+        return bankAccountService.updateBanKAccount(bankAccountDTO);
+    }
+*/
 }

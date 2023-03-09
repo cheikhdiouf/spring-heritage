@@ -21,4 +21,7 @@ public interface BankAccountService {
     void credite(Long accountId,double amount,String description) throws BankAccountNotFoundException;
     void transfert (Long accountIdSource,double amount,Long accountIdDestination);
 
+    void deleteBanKAccount(Long id);
+
+    //BankAccountDTO updateBanKAccount(BankAccountDTO bankAccountDTO);
 }

@@ -1,14 +1,8 @@
 package com.example.backendspring.mappers;
 
 import com.example.backendspring.controller.CustomerController;
-import com.example.backendspring.dto.CurrentAccountDTO;
-import com.example.backendspring.dto.CustomerDTO;
-import com.example.backendspring.dto.OperationAccountDTO;
-import com.example.backendspring.dto.SavingAccountDTO;
-import com.example.backendspring.entity.CurrentAccount;
-import com.example.backendspring.entity.Customer;
-import com.example.backendspring.entity.OperationAccount;
-import com.example.backendspring.entity.SavingAccount;
+import com.example.backendspring.dto.*;
+import com.example.backendspring.entity.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 //les autres methodes mapStruct ,modelMapper
@@ -69,4 +63,15 @@ public class BankAccountMapperImpl {
         BeanUtils.copyProperties(operationAccountDTO,operationAccount);
         return  operationAccount;
     }
+    public BankAccountDTO fromBankAccount(BankAccount bankAccount){
+        BankAccountDTO bankAccountDTO=new BankAccountDTO();
+        BeanUtils.copyProperties(bankAccount,bankAccountDTO);
+        return  bankAccountDTO;
+    }
+
+ /*   public BankAccount fromBankAccountDTO(BankAccountDTO bankAccountDTO){
+        BankAccount bankAccount=new BankAccount();
+        BeanUtils.copyProperties(bankAccount,bankAccountDTO);
+        return  bankAccount;
+    }*/
 }

@@ -1,13 +1,9 @@
 package com.example.backendspring.service;
 
-import com.example.backendspring.dto.BankAccountDTO;
-import com.example.backendspring.dto.CurrentAccountDTO;
+
 import com.example.backendspring.dto.CustomerDTO;
-import com.example.backendspring.dto.SavingAccountDTO;
-import com.example.backendspring.emuns.OperationType;
+
 import com.example.backendspring.entity.*;
-import com.example.backendspring.exception.BalanceNotFoundException;
-import com.example.backendspring.exception.BankAccountNotFoundException;
 import com.example.backendspring.exception.CustomerNotFoundException;
 import com.example.backendspring.mappers.BankAccountMapperImpl;
 import com.example.backendspring.repository.BankAccountRepository;
@@ -16,8 +12,6 @@ import com.example.backendspring.repository.OperationAccountRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -76,5 +70,13 @@ public class CustomerServiceImpl implements  CustomerService {
     @Override
     public void deleteCustomer(Long id){
         customerRepository.deleteById(id);
+    }
+
+    @Override
+    public List<CustomerDTO> seachCustomer(String keyword) {
+        //List<Customer> customers=customerRepository.findByNameContains(keyword); // methode 1
+        List<Customer> customers=customerRepository.SearchCustomer(keyword);
+        List<CustomerDTO> customerDTOLis=customers.stream().map(op->bankAccountMapperImpl.fromCustomer(op)).collect(Collectors.toList());
+        return  customerDTOLis;
     }
 }

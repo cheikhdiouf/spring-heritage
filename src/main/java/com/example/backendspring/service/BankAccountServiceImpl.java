@@ -137,5 +137,19 @@ public class BankAccountServiceImpl implements  BankAccountService {
 return;
     }
 
+    @Override
+    public void deleteBanKAccount(Long id) {
+        bankAccountRepository.deleteById(id);
+    }
+
+/*
+    @Override
+    public BankAccountDTO updateBanKAccount(BankAccountDTO bankAccountDTO) {
+        BankAccount bankAccount=bankAccountMapperImpl.fromBankAccountDTO(bankAccountDTO);
+        BankAccount savedbankAccount=bankAccountRepository.save(bankAccount);
+        return bankAccountMapperImpl.fromBankAccount( savedbankAccount);
+    }
+*/
+
 
 }
